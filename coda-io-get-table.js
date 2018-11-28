@@ -55,5 +55,5 @@ for (var attr of attrs) {
             node.send(msg);
         });
     }
-    RED.nodes.registerType("node-red-table", CodaIoTableNode);
+    RED.nodes.registerType("coda-io-get-table", CodaIoTableNode);
 }
