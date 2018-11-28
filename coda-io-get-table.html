@@ -1,0 +1,51 @@
+<script type="text/javascript">
+    RED.nodes.registerType('coda-io-get-table',
+    {
+        category: 'function',
+        color: '#f6e9de',
+        defaults: {
+            bearer_api_token: {value: ""},
+            doc_id: {value:""},
+            table_id: {value: ""},
+            get_rows: {value:true}, 
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "icon.png",
+        label: function() {
+            return this.name||"coda-io-get-table";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="coda-io-get-table">
+    <div class="form-row">
+        <label for="node-input-bearer_api_token"><i class="fa fa-key"></i> Bearer API token</label>
+        <input type="text" id="node-input-bearer_api_token" placeholder="API token">
+    </div>
+    <div class="form-row">
+        <label for="node-input-doc_id"> Coda Document ID</label>
+        <input type="text" id="node-input-doc_id" placeholder="Document ID">
+    </div>
+    <div class="form-row">
+        <label for="node-input-table_id"> Coda Table ID</label>
+        <input type="text" id="node-input-table_id" placeholder="Table ID">
+    </div>
+    <div class="form-row">
+        <label for="node-input-get_rows" style="vertical-align: top"><i class="fa fa-arrow-right"></i>Get rows</label>
+        <input type="checkbox" id="node-input-get_rows" style="display: inline-block; width: auto; vertical-align: top;">
+        <label for="node-input-get_rows" style="width: 70%;">Check to obtain rows from the table</label>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="coda-io-get-table">
+    <p>This node allows you to get a table information or rows from a table.</p>
+    <p>In order to find your table's ID, you first need to supply the ID of a document which has the table. Use the tool provided <a href="https://coda.io/developers/apis/v1beta1#doc-ids">here</a> to find out the ID of your document.</p>
+</script>
+
+
