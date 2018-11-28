@@ -7,14 +7,14 @@
             bearer_api_token: {value: ""},
             doc_id: {value:""},
             table_id: {value: ""},
-            get_rows: {value:true}, 
+            get_rows: {value:false},
             name: {value:""}
         },
-        inputs:1,
-        outputs:1,
+        inputs: 1,
+        outputs: 1,
         icon: "icon.png",
         label: function() {
-            return this.name||"coda-io-get-table";
+            return this.name||"Get coda tables/rows";
         }
     });
 </script>
@@ -44,8 +44,6 @@
 </script>
 
 <script type="text/x-red" data-help-name="coda-io-get-table">
-    <p>This node allows you to get a table information or rows from a table.</p>
+    <p>Gets a table information or rows from a table.</p>
     <p>In order to find your table's ID, you first need to supply the ID of a document which has the table. Use the tool provided <a href="https://coda.io/developers/apis/v1beta1#doc-ids">here</a> to find out the ID of your document.</p>
 </script>
-
-

@@ -4,7 +4,7 @@
   },
   "bundleDependencies": false,
   "deprecated": false,
-  "description": "A set of Node-RED nodes to interact with Coda.io",
+  "description": "A set of Node-RED nodes to interact with coda.io",
   "keywords": [
     "coda.io"
   ],
