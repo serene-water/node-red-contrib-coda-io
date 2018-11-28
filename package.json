@@ -1,16 +1,23 @@
 {
-  "name": "node-red-contrib-coda-io",
-  "version": "0.1.0",
+  "author": {
+    "name": "Mori Sugimoto"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
   "description": "A set of Node-RED nodes to interact with Coda.io",
-  "main": "coda-io-get-table.js",
   "keywords": [
     "coda.io"
   ],
-  "author": "Mori Sugimoto",
   "license": "MIT",
-  "node-red" : {
+  "main": "coda-io-get-table.js",
+  "name": "node-red-contrib-coda-io",
+  "dependencies": {
+    "lodash": "^4.17.x"
+},
+  "node-red": {
     "nodes": {
-        "coda-io-get-table": "coda-io-get-table.js"
+      "coda-io-get-table": "coda-io-get-table.js"
     }
-}
+  },
+  "version": "0.1.0"
 }
