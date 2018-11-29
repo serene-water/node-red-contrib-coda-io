@@ -1,0 +1,51 @@
+<script type="text/javascript">
+    RED.nodes.registerType('coda-io-upsert',{
+        category: 'function',
+        color: '#f6e9de',
+        defaults: {
+            name: {value: ""},
+            char_conv: {value: ""},
+            num_val: {value: ""},
+            no_conv: {value: ""},
+            null_val: {value: "[ empty ]"},
+            key_cols: {value: ""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "icon.png",
+        label: function() {
+            return this.name||"Upsert";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="coda-io-upsert">
+    <div class="form-row">
+        <label for="node-input-char_conv"><i class="icon-tag"></i> Columns with special characters</label>
+        <input type="text" id="node-input-char_conv" placeholder=" Comma separated, [A-Za-z0-9-_]">
+    </div>
+    <div class="form-row">
+        <label for="node-input-num_val"><i class="icon-tag"></i> Columns with numerical values</label>
+        <input type="text" id="node-input-num_val" placeholder=" Comma separated, [A-Za-z0-9-_]">
+    </div>
+    <div class="form-row">
+        <label for="node-input-no_conv"><i class="icon-tag"></i> Columns whose values require no checks/conversions </label>
+        <input type="text" id="node-input-no_conv" placeholder=" Comma separated, [A-Za-z0-9-_]">
+    </div>
+    <div class="form-row">
+        <label for="node-input-null_val"><i class="icon-tag"></i> Replacement value for null</label>
+        <input type="text" id="node-input-null_val" placeholder=" ^[A-Za-z0-9-_()\[\]]$">
+    </div>
+    <div class="form-row">
+        <label for="node-input-key_cols"><i class="icon-tag"></i> Upsert key columns</label>
+        <input type="text" id="node-input-key_cols" placeholder=" Comma separated, [A-Za-z0-9-_]">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="coda-io-upsert">
+    <p>NOTE: This node is designed to works with the node "coda io get table" and won't be useful on its own or with other nodes.</p>
+</script>

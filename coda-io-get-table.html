@@ -7,8 +7,9 @@
             bearer_api_token: {value: ""},
             doc_id: {value:""},
             table_id: {value: ""},
-            get_rows: {value:false},
-            name: {value:""}
+            limit: {value: ""},
+            get_rows: {value: false},
+            name: {value: ""}
         },
         inputs: 1,
         outputs: 1,
@@ -33,7 +34,11 @@
         <input type="text" id="node-input-table_id" placeholder="Table ID">
     </div>
     <div class="form-row">
-        <label for="node-input-get_rows" style="vertical-align: top"><i class="fa fa-arrow-right"></i>Get rows</label>
+        <label for="node-input-limit"> Maximum number of records to return</label>
+        <input type="text" id="node-input-limit" placeholder="Max 500">
+    </div>
+    <div class="form-row">
+        <label for="node-input-get_rows" style="vertical-align: top"><i class="fa fa-arrow-right"></i> Get rows</label>
         <input type="checkbox" id="node-input-get_rows" style="display: inline-block; width: auto; vertical-align: top;">
         <label for="node-input-get_rows" style="width: 70%;">Check to obtain rows from the table</label>
     </div>

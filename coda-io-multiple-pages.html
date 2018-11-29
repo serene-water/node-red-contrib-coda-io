@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    RED.nodes.registerType('coda-io-multiple-pages',{
+        category: 'function',
+        color: '#f6e9de',
+        defaults: {
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:2,
+        icon: "icon.png",
+        label: function() {
+            return this.name||"Join multiple coda responses";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="coda-io-multiple-pages">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="coda-io-multiple-pages">
+    <p>NOTE: This node is designed to works with the node "coda io get table" and won't be useful on its own or with other nodes.</p>
+    <p>Coda returns up to 500 records per GET request. If you table contains more than 500 records, multiple requests need to be fired in order to obtain all the records from a table. <b>NOTE:</b> if your table has tens of thousands of records, it is likely that this node will crash Node-RED.</p>
+</script>

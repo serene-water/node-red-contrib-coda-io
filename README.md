@@ -6,7 +6,7 @@ With [coda APIs](https://coda.io/developers/apis/v1beta1 "coda.io APIs"), you ca
 
 ## How to use the node 'Get coda tables/rows'
 ### 1. Preparation
-The node comes with fields for you to enter the following information:
+The node comes with fields to enter the following information:
   - Coda API authentication key
   - Document ID
   - Table ID
@@ -26,3 +26,9 @@ Coda's response is found in `msg.payload`. `msg.payload.items` is an array of al
 Once you found the ID of the table from which you want to get records, add the table ID to the coda node and tick the 'Get rows' checkbox.
 
 Coda's response will be under `msg.payload.items`, which includes metadata of each row. Values of each row will be found in `msg.payload.items.values`.
+
+
+#TODO:
+
+- Build a node that handles multiple pages (coda currently only returns up to 500 rows per GET request)
+- Build a node that handles upcert
