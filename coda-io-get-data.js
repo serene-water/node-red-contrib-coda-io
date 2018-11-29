@@ -21,7 +21,6 @@ module.exports = function(RED) {
                 var attrs = ['bearer_api_token', 'doc_id', 'table_id', 'limit', 'get_rows'];
                 var val = attrVal = '';
 
-                node.warn(payload);
                 for (var attr of attrs) {
 
                     // Attempt matching only if the value is not boolean or null,
@@ -72,23 +71,20 @@ module.exports = function(RED) {
                 }
 
                 // Set the limit of number of rows to retrieve
-                // TODO: uncomment
-                // let limit = "?limit=";
-                // const num = parseInt(payload.limit)
-                // if (num != null && num <= 500) {
-                //      limit = limit + num;
-                // }
-                // else {
-                //     limit = limit + 500;
-                // }
+                let limit = "?limit=";
+                const num = parseInt(payload.limit)
+                if (num != null && num <= 500) {
+                     limit = limit + num;
+                }
+                else {
+                    limit = limit + 500;
+                }
 
-                
                 // If there are multiple pages, construct a query with a page token
-                // let nextPage = '';
-                // TODO: uncomment
-                // if (msg.coda.nextPage != null && _.isNumber(msg.coda.nextPage)) {
-                //     nextPage = "&pageToken=" + msg.coda.nextPage;
-                // }
+                let nextPage = '';
+                if (msg.coda.nextPage != null && _.isNumber(msg.coda.nextPage)) {
+                    nextPage = "&pageToken=" + msg.coda.nextPage;
+                }
 
                 // Construct a query string
                 let reqStr;
@@ -99,14 +95,13 @@ module.exports = function(RED) {
                 // Keep reqStr in case it is needed later
                 msg.coda.reqStr = reqStr;
 
-                // TODO: Uncomment and replace the shorter version
-                // msg.url = 'https://coda.io/apis/v1beta1/' + reqStr + limit + nextPage;
-                msg.url = 'https://coda.io/apis/v1beta1/' + reqStr;
+                msg.url = 'https://coda.io/apis/v1beta1/' + reqStr + limit + nextPage;
+
             }
 
             node.warn(msg);
             node.send(msg);
         });
     }
-    RED.nodes.registerType("coda-io-get-table", CodaIoTableNode);
+    RED.nodes.registerType("coda-io-get-data", CodaIoTableNode);
 }

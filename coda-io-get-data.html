@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    RED.nodes.registerType('coda-io-get-table',
+    RED.nodes.registerType('coda-io-get-data',
     {
         category: 'function',
         color: '#f6e9de',
@@ -15,12 +15,12 @@
         outputs: 1,
         icon: "icon.png",
         label: function() {
-            return this.name||"Get coda tables/rows";
+            return this.name||"Get data from coda";
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="coda-io-get-table">
+<script type="text/x-red" data-template-name="coda-io-get-data">
     <div class="form-row">
         <label for="node-input-bearer_api_token"><i class="fa fa-key"></i> Bearer API token</label>
         <input type="text" id="node-input-bearer_api_token" placeholder="API token">
@@ -48,7 +48,7 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="coda-io-get-table">
+<script type="text/x-red" data-help-name="coda-io-get-data">
     <p>Gets a table information or rows from a table.</p>
     <p>In order to find your table's ID, you first need to supply the ID of a document which has the table. Use the tool provided <a href="https://coda.io/developers/apis/v1beta1#doc-ids">here</a> to find out the ID of your document.</p>
 </script>
