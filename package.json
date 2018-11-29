@@ -9,14 +9,16 @@
     "coda.io"
   ],
   "license": "MIT",
-  "main": "coda-io-get-table.js",
+  "main": "index.js",
   "name": "node-red-contrib-coda-io",
   "dependencies": {
     "lodash": "^4.17.x"
   },
   "node-red": {
     "nodes": {
-      "coda-io-get-table": "coda-io-get-table.js"
+      "coda-io-get-table": "coda-io-get-table.js",
+      "coda-io-multiple-pages": "coda-io-multiple-pages.js",
+      "coda-io-upsert": "coda-io-upsert.js"
     }
   },
   "version": "0.1.0"
