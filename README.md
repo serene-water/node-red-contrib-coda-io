@@ -4,31 +4,36 @@
 
 With [coda APIs](https://coda.io/developers/apis/v1beta1 "coda.io APIs"), you can interact with tables within Coda documents. The nodes included in this package allow you to easily work with Coda API using Node-RED.
 
-## How to use the node 'Get coda tables/rows'
-### 1. Preparation
+## How to get data from Coda
+### Preparation
 The node comes with fields to enter the following information:
   - Coda API authentication key
   - Document ID
-  - Table ID
+  - Table ID (optional)
 
 To find your document ID, use [this tool](https://coda.io/developers/apis/v1beta1#doc-ids).
 
-### 2. Find out table IDs
-To find the table name, send leave the 'Table ID' field blank.
+### 1. Find out table IDs
+1. Connect an inject node to the coda connection settings node
+2. Connect it to the get data node
+3. Connect it to a HTTP request function node (set the method to GET) so that the output of the coda node is passed on to it
+4. Finally output the message to a debug node.
 
-Connect an inject node to the coda node, then connect a HTTP request function node so that the output of the coda node is passed on to it. Finally output the message to a debug node. Here's an example of the flow:
+Here's an example of the flow:
 
-```[{"id":"69eb5e38.bc12b","type":"tab","label":"Flow 2","disabled":false,"info":""},{"id":"2505aded.ab29b2","type":"debug","z":"69eb5e38.bc12b","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","x":270,"y":200,"wires":[]},{"id":"7c547c80.9444e4","type":"inject","z":"69eb5e38.bc12b","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":160,"y":80,"wires":[["b8149537.635058"]]},{"id":"b8149537.635058","type":"coda-io-get-table","z":"69eb5e38.bc12b","bearer_api_token":"[API TOKEN HERE]","doc_id":"[DOC ID HERE]","table_id":"","get_rows":false,"name":"","x":220,"y":120,"wires":[["5d41bbb8.af3084"]]},{"id":"5d41bbb8.af3084","type":"http request","z":"69eb5e38.bc12b","name":"","method":"GET","ret":"obj","url":"","tls":"","x":230,"y":160,"wires":[["2505aded.ab29b2"]]}]```
+```[{"id":"b6c39003.639e5","type":"inject","z":"4050c482.8f8fcc","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":260,"y":620,"wires":[["7ed145fb.a585ec"]]},{"id":"7ed145fb.a585ec","type":"coda-io-connection","z":"4050c482.8f8fcc","bearer_api_token":"","doc_id":"","secondary_id":"","name":"","x":360,"y":660,"wires":[["c156580f.0ddd38"]]},{"id":"c156580f.0ddd38","type":"coda-io-get-data","z":"4050c482.8f8fcc","limit":"3","get_rows":true,"name":"","x":410,"y":700,"wires":[["cf76c463.036918"]]},{"id":"cf76c463.036918","type":"debug","z":"4050c482.8f8fcc","name":"Done","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","x":430,"y":740,"wires":[]}]```
 
 Coda's response is found in `msg.payload`. `msg.payload.items` is an array of all the tables found in the document. If the debug message gets cut off and you cannot see all the tables, simply increase the value of `debugMaxLength` in `settings.js`.
 
+ `msg.payload.items` will contain a list of tables. You can grab an ID of the table from it.
+
+
 ### 3. Get rows from a table
-Once you found the ID of the table from which you want to get records, add the table ID to the coda node and tick the 'Get rows' checkbox.
+Once you found the ID of the table from which you want to get rows, add the table ID to the connection settings node. Then in the get data node, tick the 'Get rows' checkbox.
 
 Coda's response will be under `msg.payload.items`, which includes metadata of each row. Values of each row will be found in `msg.payload.items.values`.
 
 
-#TODO:
-
-- Build a node that handles multiple pages (coda currently only returns up to 500 rows per GET request)
+## TODO:
+- Add an option to get folders. Currently only supports tables
 - Build a node that handles upcert

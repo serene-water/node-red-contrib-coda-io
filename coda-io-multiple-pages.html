@@ -23,5 +23,14 @@
 
 <script type="text/x-red" data-help-name="coda-io-multiple-pages">
     <p>NOTE: This node is designed to works with the node "coda io get table" and won't be useful on its own or with other nodes.</p>
-    <p>Coda returns up to 500 records per GET request. If you table contains more than 500 records, multiple requests need to be fired in order to obtain all the records from a table. <b>NOTE:</b> if your table has tens of thousands of records, it is likely that this node will crash Node-RED.</p>
+
+    <p>Coda returns rows up to the limit you set, or max 500 per GET request. If your table contains more than the limit you set or 500 records, multiple requests need to be fired in order to obtain all the records from a table. <b>NOTE:</b> if your table has tens of thousands of records, it is likely that this node will eat up all the available memory and crash Node-RED.</p>
+
+    <p>Connect this node to the 'get data' node if you are expecting to get more than the limit you've set.</p>
+
+    <p>If more records are available in the table, the message gets sent through the top output. This should be connected back to the 'get data' node with a delay.</p>
+    <p>If no more records are available, the message gets sent through the bottom output. The results will be found in the usual place i.e. <pre>msg.payload.items</pre></p>
+    <p>Below is an example of the setup:
+        <pre>[{"id":"956b08f1.c58938","type":"delay","z":"4050c482.8f8fcc","name":"","pauseType":"delay","timeout":"3","timeoutUnits":"seconds","rate":"1","nbRateUnits":"1","rateUnits":"second","randomFirst":"1","randomLast":"5","randomUnits":"seconds","drop":false,"x":840,"y":780,"wires":[["195d7d6b.d6dc03"]]},{"id":"e64a4ac7.0636b8","type":"coda-io-multiple-pages","z":"4050c482.8f8fcc","name":"","x":620,"y":800,"wires":[["956b08f1.c58938"],["144dc0f3.79071f"]]},{"id":"195d7d6b.d6dc03","type":"coda-io-get-data","z":"4050c482.8f8fcc","limit":"","get_rows":true,"name":"","x":590,"y":680,"wires":[["7065cd67.1ea974"]]},{"id":"7065cd67.1ea974","type":"http request","z":"4050c482.8f8fcc","name":"","method":"GET","ret":"obj","url":"","tls":"","x":850,"y":680,"wires":[["e64a4ac7.0636b8"]]},{"id":"57a9d5ff.f1665c","type":"comment","z":"4050c482.8f8fcc","name":"More rows available","info":"","x":1050,"y":780,"wires":[]},{"id":"144dc0f3.79071f","type":"debug","z":"4050c482.8f8fcc","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":850,"y":840,"wires":[]},{"id":"20916062.cb87d","type":"comment","z":"4050c482.8f8fcc","name":"No more rows available","info":"","x":1060,"y":840,"wires":[]},{"id":"20464bd0.359e24","type":"coda-io-connection","z":"4050c482.8f8fcc","bearer_api_token":"","doc_id":"","secondary_id":"","name":"","x":320,"y":680,"wires":[["195d7d6b.d6dc03"]]},{"id":"fc32b1f9.9fbb4","type":"inject","z":"4050c482.8f8fcc","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":140,"y":680,"wires":[["20464bd0.359e24"]]}]</pre>
+    </p>
 </script>

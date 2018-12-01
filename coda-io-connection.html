@@ -1,26 +1,24 @@
 <script type="text/javascript">
-    RED.nodes.registerType('coda-io-get-table',
+    RED.nodes.registerType('coda-io-connection',
     {
         category: 'function',
         color: '#f6e9de',
         defaults: {
             bearer_api_token: {value: ""},
             doc_id: {value:""},
-            table_id: {value: ""},
-            limit: {value: ""},
-            get_rows: {value: false},
+            secondary_id: {value: ""},
             name: {value: ""}
         },
         inputs: 1,
         outputs: 1,
         icon: "icon.png",
         label: function() {
-            return this.name||"Get coda tables/rows";
+            return this.name||"Connection settings";
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="coda-io-get-table">
+<script type="text/x-red" data-template-name="coda-io-connection">
     <div class="form-row">
         <label for="node-input-bearer_api_token"><i class="fa fa-key"></i> Bearer API token</label>
         <input type="text" id="node-input-bearer_api_token" placeholder="API token">
@@ -30,17 +28,8 @@
         <input type="text" id="node-input-doc_id" placeholder="Document ID">
     </div>
     <div class="form-row">
-        <label for="node-input-table_id"> Coda Table ID</label>
-        <input type="text" id="node-input-table_id" placeholder="Table ID">
-    </div>
-    <div class="form-row">
-        <label for="node-input-limit"> Maximum number of records to return</label>
-        <input type="text" id="node-input-limit" placeholder="Max 500">
-    </div>
-    <div class="form-row">
-        <label for="node-input-get_rows" style="vertical-align: top"><i class="fa fa-arrow-right"></i> Get rows</label>
-        <input type="checkbox" id="node-input-get_rows" style="display: inline-block; width: auto; vertical-align: top;">
-        <label for="node-input-get_rows" style="width: 70%;">Check to obtain rows from the table</label>
+        <label for="node-input-secondary_id"> Coda Table/Field ID</label>
+        <input type="text" id="node-input-secondary_id" placeholder="Table/Field ID">
     </div>
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
@@ -48,7 +37,7 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="coda-io-get-table">
-    <p>Gets a table information or rows from a table.</p>
+<script type="text/x-red" data-help-name="coda-io-connection">
+    <p>Enter connection settings. You can generate your API token in <a href="https://coda.io/account">your profile page</a>.</p>
     <p>In order to find your table's ID, you first need to supply the ID of a document which has the table. Use the tool provided <a href="https://coda.io/developers/apis/v1beta1#doc-ids">here</a> to find out the ID of your document.</p>
 </script>
