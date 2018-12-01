@@ -7,12 +7,12 @@ module.exports = function(RED) {
         RED.nodes.createNode(this, n);
         var node = this;
         node.on('input', function(msg) {
-
+            msg.coda = {header: ''};
             msg.headers = {};
             msg.headers['Authorization'] = 'Bearer ' + n.bearer_api_token;
+            msg.coda.header = msg.headers['Authorization'];
 
             //TODO: handle folders
-            msg.coda = {};
             msg.coda.doc_id = n.doc_id;
             msg.coda.secondary_id = n.secondary_id;
 

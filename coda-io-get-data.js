@@ -23,10 +23,15 @@ module.exports = function(RED) {
             //     req.rows = null;
             // }
 
-            const CodaReqestUri = require('./core.js');
-            let coda = new CodaReqestUri(msg.coda.doc_id, msg.coda.secondary_id);
-            let uri = coda.getRequestUri(n.get_rows);
-            msg.url = coda.appendLimit(uri, n.limit);
+            if (typeof msg.coda.nextPageLink !== 'undefined') {
+                msg.url = msg.coda.nextPageLink;
+            }
+            else {
+                const CodaReqestUri = require('./core.js');
+                let coda = new CodaReqestUri(msg.coda.doc_id, msg.coda.secondary_id);
+                let uri = coda.getRequestUri(n.get_rows);
+                msg.url = coda.appendLimit(uri, n.limit);
+            }
 
             node.send(msg);
         });
