@@ -37,3 +37,7 @@ Coda's response will be under `msg.payload.items`, which includes metadata of ea
 ## TODO:
 - Add an option to get folders. Currently only supports tables
 - Build a node that handles upcert
+- Maybe add a subform to the API key field and table name field respectively so they can be selected from ones that have been registered
+
+## CAUTION:
+This package is still in its infancy. It is likely that, in the near future, non-backwards-compatible changes will be introduced without notice (e.g. adding subforms as described in the TODO above). Make sure to test the new version in a separate environment before installing the update to your production environment.
