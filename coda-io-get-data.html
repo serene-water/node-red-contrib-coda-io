@@ -4,9 +4,6 @@
         category: 'function',
         color: '#f6e9de',
         defaults: {
-            bearer_api_token: {value: ""},
-            doc_id: {value:""},
-            table_id: {value: ""},
             limit: {value: ""},
             get_rows: {value: false},
             name: {value: ""}
@@ -22,25 +19,13 @@
 
 <script type="text/x-red" data-template-name="coda-io-get-data">
     <div class="form-row">
-        <label for="node-input-bearer_api_token"><i class="fa fa-key"></i> Bearer API token</label>
-        <input type="text" id="node-input-bearer_api_token" placeholder="API token">
-    </div>
-    <div class="form-row">
-        <label for="node-input-doc_id"> Coda Document ID</label>
-        <input type="text" id="node-input-doc_id" placeholder="Document ID">
-    </div>
-    <div class="form-row">
-        <label for="node-input-table_id"> Coda Table ID</label>
-        <input type="text" id="node-input-table_id" placeholder="Table ID">
+        <label for="node-input-get_rows" style="vertical-align: top"><i class="fa fa-arrow-right"></i> Get rows</label>
+        <input type="checkbox" id="node-input-get_rows" style="display: inline-block; width: auto; vertical-align: top;">
+        <label for="node-input-get_rows" style="width: 70%;"> Get rows from the table</label>
     </div>
     <div class="form-row">
         <label for="node-input-limit"> Maximum number of records to return</label>
         <input type="text" id="node-input-limit" placeholder="Max 500">
-    </div>
-    <div class="form-row">
-        <label for="node-input-get_rows" style="vertical-align: top"><i class="fa fa-arrow-right"></i> Get rows</label>
-        <input type="checkbox" id="node-input-get_rows" style="display: inline-block; width: auto; vertical-align: top;">
-        <label for="node-input-get_rows" style="width: 70%;">Check to obtain rows from the table</label>
     </div>
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>

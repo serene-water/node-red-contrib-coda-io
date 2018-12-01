@@ -16,6 +16,7 @@
   },
   "node-red": {
     "nodes": {
+      "coda-io-connection": "coda-io-connection.js",
       "coda-io-get-table": "coda-io-get-data.js",
       "coda-io-multiple-pages": "coda-io-multiple-pages.js",
       "coda-io-upsert": "coda-io-upsert.js"
