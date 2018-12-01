@@ -9,7 +9,7 @@
     "coda.io"
   ],
   "license": "MIT",
-  "main": "index.js",
+  "main": "core.js",
   "name": "node-red-contrib-coda-io",
   "dependencies": {
     "lodash": "^4.17.x"
