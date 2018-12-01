@@ -56,22 +56,6 @@ module.exports = function(RED) {
                     i++;
                 });
 
-                //TODO: delete
-                const aggrDate = new Date().toISOString().slice(0,10);
-                // Set aggregation date 
-                let dateInfo = {
-                    'column': 'signify_aggregation_date',
-                    'value': aggrDate
-                };
-                cells.push(dateInfo);
-
-                // Set query name
-                // let queryName = {
-                //     'column': 'query_name',
-                //     'value': msg.buzzSumo.qstr[msg.coda.colNameId]
-                // }
-                // cells.push(queryName);
-
                 rows[rowNum] = {'cells': cells};
                 rowNum++;
 
