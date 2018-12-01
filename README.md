@@ -34,6 +34,6 @@ Once you found the ID of the table from which you want to get rows, add the tabl
 Coda's response will be under `msg.payload.items`, which includes metadata of each row. Values of each row will be found in `msg.payload.items.values`.
 
 
-#TODO:
+## TODO:
 - Add an option to get folders. Currently only supports tables
 - Build a node that handles upcert
