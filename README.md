@@ -46,9 +46,7 @@ In the below example, it uses a delay node to keep some interval between each re
 
 ## TODO:
 - Add an option to get folders. Currently only supports tables
-- Build a node that handles upcert
 - Build a coda row parser
-- Maybe add a subform to the API key field and table name field respectively so they can be reused
 
 ## CAUTION:
-This package is still in its infancy. It is likely that, in the near future, non-backwards-compatible changes will be introduced without notice (e.g. adding subforms as described in the TODO above). Make sure to test the new version in a separate environment before installing the update to your production environment.
+This package is still in its infancy. It is likely that, in the near future, non-backwards-compatible changes will be introduced without notice. When a new version becomes available, make sure to test it thoroughly in a separate development environment before installing the update to your production environment.
