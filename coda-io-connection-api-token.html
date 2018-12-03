@@ -1,0 +1,23 @@
+<script type="text/javascript">
+    RED.nodes.registerType('coda-io-connection-api-token', {
+        category: 'config',
+        defaults: {
+            name: {value: ""},
+            api_token: {value: ""}
+        },
+        label: function() {
+            return this.name;
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="coda-io-connection-api-token">
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-config-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-api_token"><i class="fa fa-lock"></i> API token</label>
+        <input type="text" id="node-config-input-api_token">
+    </div>
+</script>

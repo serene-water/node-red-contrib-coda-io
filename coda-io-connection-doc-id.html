@@ -1,0 +1,23 @@
+<script type="text/javascript">
+    RED.nodes.registerType('coda-io-connection-doc-id', {
+        category: 'config',
+        defaults: {
+            name: {value: ""},
+            doc_id: {value: ""}
+        },
+        label: function() {
+            return this.name;
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="coda-io-connection-doc-id">
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-config-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-doc_id"><i class="fa fa-lock"></i> Document ID</label>
+        <input type="text" id="node-config-input-doc_id">
+    </div>
+</script>

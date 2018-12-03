@@ -19,7 +19,10 @@
       "coda-io-connection": "coda-io-connection.js",
       "coda-io-get-table": "coda-io-get-data.js",
       "coda-io-multiple-pages": "coda-io-multiple-pages.js",
-      "coda-io-upsert": "coda-io-upsert.js"
+      "coda-io-upsert": "coda-io-upsert.js",
+      "coda-io-connection-api-token": "coda-io-connection-api-token.js",
+      "coda-io-connection-doc-id": "coda-io-connection-doc-id.js"
+
     }
   },
   "version": "0.2.0"

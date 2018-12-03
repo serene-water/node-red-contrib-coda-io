@@ -1,11 +1,11 @@
 "use strict";
 
 /**
- * Handles construction of request URI
+ * Handles construction of request URL
  */
 
 
-module.exports = class CodaReqestUri {
+module.exports = class CodaReqestUrl {
     constructor(docId, secondaryId) {
         this.docId = docId;
         this.secondaryId = secondaryId;
@@ -20,8 +20,9 @@ module.exports = class CodaReqestUri {
         // }
     }
 
-    getRequestUri(getRows) {
-        console.log('getRequestUri called...');
+    getRequestUrl(getRows) {
+        
+        // TODO: allow variables, not just hard-coded values
         // const attrs = ['doc_id', 'secondary_id', 'limit', 'get_rows'];
         // let val = '';
         // let attrVal = '';
@@ -58,7 +59,6 @@ module.exports = class CodaReqestUri {
         //     }
         // }
 
-
         // Construct a query string
         let reqStr;
         let req = {};
@@ -73,12 +73,12 @@ module.exports = class CodaReqestUri {
             reqStr = (req[str] == null ? reqStr + '' : reqStr + '/' + req[str]);
         }
 
-        let uri = 'https://coda.io/apis/v1beta1/' + reqStr;
-        return uri;
+        let url = 'https://coda.io/apis/v1beta1/' + reqStr;
+        return url;
 
     }
 
-    appendLimit(uri, limit) {
+    appendLimit(url, limit) {
         // Set the limit of number of rows to retrieve
         let paramLimit = "?limit=";
         const num = parseInt(limit)
@@ -88,6 +88,6 @@ module.exports = class CodaReqestUri {
         else {
             paramLimit = paramLimit + 500;
         }
-        return uri + paramLimit;
+        return url + paramLimit;
     }
 }
