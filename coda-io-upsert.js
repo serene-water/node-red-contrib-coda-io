@@ -70,10 +70,10 @@ module.exports = function(RED) {
                 msg.payload.keyColumns = key_cols;
             }
 
-            // Finally, construct the URI
-            const CodaReqestUri = require('./core.js');
-            let coda = new CodaReqestUri(msg.coda.doc_id, msg.coda.secondary_id);
-            msg.url = coda.getRequestUri(true);
+            // Finally, construct the URL
+            const CodaReqestUrl = require('./core.js');
+            let coda = new CodaReqestUrl(msg.coda.doc_id, msg.coda.secondary_id);
+            msg.url = coda.getRequestUrl(true);
 
             node.send(msg);
         });

@@ -4,8 +4,8 @@
         category: 'function',
         color: '#f6e9de',
         defaults: {
-            bearer_api_token: {value: ""},
-            doc_id: {value:""},
+            bearer_api_token: {value: "", type: "coda-io-connection-api-token"},
+            doc_id: {value:"", type: "coda-io-connection-doc-id"},
             secondary_id: {value: ""},
             name: {value: ""}
         },
@@ -20,17 +20,20 @@
 
 <script type="text/x-red" data-template-name="coda-io-connection">
     <div class="form-row">
-        <label for="node-input-bearer_api_token"><i class="fa fa-key"></i> Bearer API token</label>
-        <input type="text" id="node-input-bearer_api_token" placeholder="API token">
+    <label for="node-input-bearer_api_token"><i class="fa fa-lock"></i> API token</label>
+        <input type="text" id="node-input-bearer_api_token">
     </div>
+
     <div class="form-row">
-        <label for="node-input-doc_id"> Coda Document ID</label>
-        <input type="text" id="node-input-doc_id" placeholder="Document ID">
+    <label for="node-input-doc_id"><i class="fa fa-file"></i> Document ID</label>
+        <input type="text" id="node-input-doc_id">
     </div>
+
     <div class="form-row">
-        <label for="node-input-secondary_id"> Coda Table/Field ID</label>
+        <label for="node-input-secondary_id"> Table/Field ID</label>
         <input type="text" id="node-input-secondary_id" placeholder="Table/Field ID">
     </div>
+
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
