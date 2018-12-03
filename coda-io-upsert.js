@@ -7,28 +7,30 @@ module.exports = function(RED) {
         var node = this;
         node.on('input', function(msg) {
 
-            var payload = typeof msg.payload === 'object' ? msg.payload : {};
-            const pl = msg.payload.results;
+            const pl = typeof msg.payload === 'object' ? msg.payload : {};
 
+            // TODO: Improve - this bit is repetitive and inefficient
             // List of fields whose value doesn't need any modifications
-            const fields = n.no_conv.split(',');
+            let rawFields = n.coda_cnf_field_no_conv.split(',');
+            rawFields = rawFields.map(Function.prototype.call, String.prototype.trim);
 
             // Fields whose values contain URI elements and need to be encoded
-            const uriFields = n.char_conv.split(',');
+            let uriFields = n.coda_cnf_field_char_conv.split(',');
+            uriFields = uriFields.map(Function.prototype.call, String.prototype.trim);
 
             // Numeric fields
-            const numFields = n.num_val.split(',');
+            let numFields = n.coda_cnf_field_num_val.split(',');
+            numFields = numFields.map(Function.prototype.call, String.prototype.trim);
 
-            // Merge all the arrays together
-            let allFields = [...fields, ...uriFields, ...numFields];
-
+            // Merge all the arrays together, then remove empty elements
+            const allFields = [...rawFields, ...uriFields, ...numFields].filter(val =>  val !== '');
             let rows = [];
             let rowNum = 0
 
             pl.forEach((plArr) => {
 
                 let i = 0;
-                cells = [];
+                let cells = [];
 
                 // Process only the fields and values that are relevant
                 allFields.forEach((fieldName) => {
@@ -62,9 +64,17 @@ module.exports = function(RED) {
             })
 
             msg.payload = {'rows': rows};
-            if (n.key_cols != '') {
-                msg.payload.keyColumns = n.key_cols;
+            if (n.key_cols.length != '') {
+                let key_cols = n.key_cols.split(',');
+                key_cols = key_cols.map(Function.prototype.call, String.prototype.trim);
+                msg.payload.keyColumns = key_cols;
             }
+
+            // Finally, construct the URI
+            const CodaReqestUri = require('./core.js');
+            let coda = new CodaReqestUri(msg.coda.doc_id, msg.coda.secondary_id);
+            msg.url = coda.getRequestUri(true);
+
             node.send(msg);
         });
     }

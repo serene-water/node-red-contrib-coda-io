@@ -16,6 +16,11 @@ module.exports = function(RED) {
             msg.coda.doc_id = n.doc_id;
             msg.coda.secondary_id = n.secondary_id;
 
+            // Clean up if there is any remnants from previous requests
+            delete msg.responseUrl;
+            delete msg.statusCode;
+            delete msg.responseCookies;
+
             node.send(msg);
         });
     }
