@@ -7,13 +7,18 @@ module.exports = function(RED) {
         RED.nodes.createNode(this, n);
         var node = this;
         node.on('input', function(msg) {
+
+            const connCreds = RED.nodes.getNode(n.bearer_api_token);
+            const api_token = connCreds.api_token;
+
             msg.coda = {header: ''};
             msg.headers = {};
-            msg.headers['Authorization'] = 'Bearer ' + n.bearer_api_token;
+            msg.headers['Authorization'] = 'Bearer ' + api_token;
             msg.coda.header = msg.headers['Authorization'];
 
             //TODO: handle folders
-            msg.coda.doc_id = n.doc_id;
+            const connDocId = RED.nodes.getNode(n.doc_id);
+            msg.coda.doc_id = connDocId.doc_id;
             msg.coda.secondary_id = n.secondary_id;
 
             // Clean up if there is any remnants from previous requests
