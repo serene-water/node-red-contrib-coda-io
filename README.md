@@ -93,16 +93,17 @@ The below is written under the assumption that:
 2. add a new **upsert** node, then specify the destination table's fields. Its settings page has three fields for storing column names/IDs of the destination table. This is done to run appropriate checks for different data types. Make sure to enter the column names/IDs correctly, or it will upsert will fail
 3. If you wish to update rows, you must give the name/ID of the column whose value will be used as the key. You can use more than one column for as the key. Make sure a key / a combination of keys only points to a single row
 4. Connect it to the 'http request' function node. Open it and set the method to POST, then set the return value to 'parsed JSON object'
-5. Connect it to a debug node and set it to display the entire `msg` object, rather than the payload
+5. Connect it to a debug node and set it to display the complete `msg` object, rather than the payload
 
-If you see the response `202`, then the upsert request was a success. It may take a while before the changes appear in the destination table.
+If you see the statusCode `202`, then the upsert request was a success. It may take a while before the changes appear in the destination table.
 
 ![Example of an upsert flow using the coda nodes](./doc/images/flow_upsert.jpg)
 
 # TODO:
 - [] Add an option to get folders. Currently only supports tables
 - [] Build a coda row parser to feed coda row data into the upsert node
-- [] Improve the code a bit
+- [] Accept `msg` object members as variable field values
+- [] Refactor the code a bit
 
 # CAUTION:
 This package is still in its infancy. It is likely that, in the near future, non-backwards-compatible changes will be introduced without notice. When a new version becomes available, make sure to test it thoroughly in a separate development environment before installing the update to your production environment.
