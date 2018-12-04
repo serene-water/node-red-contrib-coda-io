@@ -103,7 +103,9 @@ If you see the statusCode `202`, then the upsert request was a success. It may t
 - [] Add an option to get folders. Currently only supports tables
 - [] Build a coda row parser to feed coda row data into the upsert node
 - [] Accept `msg` object members as variable field values
+- [] Add validation
+- [] Add a better error handling
 - [] Refactor the code a bit
 
 # CAUTION:
-This package is still in its infancy. It is likely that, in the near future, non-backwards-compatible changes will be introduced without notice. When a new version becomes available, make sure to test it thoroughly in a separate development environment before installing the update to your production environment.
+This package is still in its infancy. It is likely that, in the near future, non-backwards-compatible may be introduced without prior notice. When a new version becomes available, make sure to test it thoroughly in a separate development environment before installing it to your production environment.
