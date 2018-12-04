@@ -1,23 +1,25 @@
-# Node-RED nodes for coda
+# Node-RED nodes for Coda
 
-[coda](https://coda.io/ "coda") is a powerful  online tool that allows you to build complex and interactive documents quickly.
+[Coda](https://coda.io/ "Coda") is a powerful online tool that allows you to build complex and interactive documents quickly.
 
-With [coda APIs](https://coda.io/developers/apis/v1beta1 "coda.io APIs"), you can interact with tables within Coda documents. The nodes included in this package allow you to easily work with Coda API using Node-RED.
+With [Coda APIs](https://coda.io/developers/apis/v1beta1 "coda.io APIs"), you can interact with tables within Coda documents. The nodes included in this package allow you to easily work with Coda APIs using Node-RED.
+
+**This package is compatible with Coda API version 0.1.1-beta. **
 
 ## Content of this package and features
 
   - **Connection settings node**
-    - Stores multiple coda API tokens and table IDs
+    - Stores multiple Coda API tokens and table IDs
   - **Get data node**
     - This node constructs a URL and HTTP header to:
       - get a list of tables in a doc
       - get a list of columns in a table
       - get rows from a table
   - **Multiple pages node**
-    - Sends multiple requests to coda to retrieve a large numbers of rows from coda (coda allows you to retrieve up to 500 rows per GET request)
+    - Sends multiple requests to Coda to retrieve a large number of rows from Coda (Coda allows you to retrieve up to 500 rows per GET request)
   - **Upsert node**
     - constructs a URL and HTTP header
-    - format data that is accepted by coda
+    - format data into a structure that is accepted by Coda APIs
 
 Please note: this package does not handle HTTP requests, but relies on the 'HTTP request' function node to handle it.
 
@@ -31,13 +33,13 @@ The node comes with fields to enter the following information:
 To find your document ID, use [this tool](https://coda.io/developers/apis/v1beta1#doc-ids).
 
 ### 1. Find out table IDs
-1. Connect an inject node to a **coda connection settings**__** node
+1. Connect an inject node to a **Coda connection settings**__** node
 2. Connect it to a **get data** node
-3. Connect it to a 'HTTP request' function node. Open the node, then select 'GET' in the 'Method' dropdown, as well as 'a parsed JSON object' for 'Return'
+3. Connect it to an 'HTTP request' function node. Open the node, then select 'GET' in the 'Method' dropdown, as well as 'a parsed JSON object' for 'Return'
 4. Output the message to a debug node. Coda's response is found in `msg.payload`
 5. `msg.payload.items` is an array of all the tables found in the document and contains a list of tables. You can obtain the ID of the table you want to refer to. If the debug message gets cut off and you cannot see all the tables, simply increase the value of `debugMaxLength` in `settings.js`.
 
-![Example of a basic flow using the coda nodes](./doc/images/flow_basic.jpg)
+![Example of a basic flow using the Coda nodes](./doc/images/flow_basic.jpg)
 
 Here's an example of the flow:
 
@@ -49,10 +51,10 @@ Once you found the ID of the table from which you want to get rows, add the tabl
 
 Coda's response will be under `msg.payload.items`, which includes metadata of each row. Values of each row will be found in `msg.payload.items.values`.
 
-#### 2.1 Get 500+ rows from a table / ask coda to return a sertain number of rows per GET request
+#### 2.1 Get 500+ rows from a table / ask Coda to return a certain number of rows per GET request
 Coda sets a limit of 500 rows per GET request (as of Dec 2018). If you want to retrieve more than 500 or retrieve a certain number of rows below 500 per request, you need to set a limit and send multiple GET requests by building a loop with the multiple pages node.
 
-In the below example, it uses a delay node to keep some interval between each request (although the delay node is probably an overkill, as each response to a GET request takes a few seconds to arrive). Coda has rate limits, but the details are not disclosed . If you are planning on sending loads of requests, it might be a good idea to contact them and see if they can increase the limit for you. The email address is found in the API doc.
+In the below example, it uses a delay node to keep some interval between each request (although the delay node is probably an overkill, as each response to a GET request takes a few seconds to arrive). Coda has rate limits, but the details are not disclosed. If you are planning on sending loads of requests, it might be a good idea to contact them and see if they can increase the limit for you. The email address is found in the API doc.
 
 ![Example of a flow with a loop using the multiple requests nodes](./doc/images/flow_multiple_requests.jpg)
 
@@ -60,33 +62,34 @@ In the below example, it uses a delay node to keep some interval between each re
 
 ## 3 Upsert
 The upsert node can be used for the following scenarios:
-- You want to aggregate tweets and store them in a coda table (insert)
-- You have a table in two separate documents respectively. The number of records don't change and you want to sync the two (update)
+- You want to aggregate data such as tweets and store them in a Coda table (insert)
+- You have a table in two separate documents respectively. The number of records doesn't change and you simply want to keep the two tables in sync (update)
 - You have a table in two separate documents respectively. The number of records *does* change and you want to sync the two i.e. sometimes existing field values are updated, but sometimes new rows are added (upsert)
 
-In order for the upsert node to format the data in the way coda accepts, you need to pass the data to the node in the following format:
+In order for the upsert node to format the data in the way Coda accepts, you need to pass the data to the node in the following structure:
 ```
 [
     {
-        "column name OR column ID 1": "value1",
-        "column name OR column ID 2": "value2",
-        "column name OR column ID 3": "value3"
+        "column name/ID 1": "value1",
+        "column name/ID 2": "value2",
+        "column name/ID 3": "value3"
         . . .
     },
     {
-        "column name OR column ID 1": "value1",
-        "column name OR column ID 2": "value2",
-        "column name OR column ID 3": "value3"
+        "column name/ID 1": "value1",
+        "column name/ID 2": "value2",
+        "column name/ID 3": "value3"
         . . .
     }
     . . .
 ]
 ```
+Althougg the above example only shows string values, you can also pass numbers, dates etc. as long as it matches with the destination column's format.
 
-#### 3.1 How to set up the upsert flow
+#### 3.1 How to set up an upsert flow
 
-The below is written under the assumption that:
-- you already have a flow that retrieves the data from some source (coda / twitter etc.)
+The below is written under an assumption that:
+- you already have a flow that retrieves the data from some source (Coda/twitter etc.)
 - you have a custom function node that formats the retrieved data into the accepted format, as described above
 
 1. add a new **connection settings** node and set it up to access the destination document and table
@@ -97,11 +100,11 @@ The below is written under the assumption that:
 
 If you see the statusCode `202`, then the upsert request was a success. It may take a while before the changes appear in the destination table.
 
-![Example of an upsert flow using the coda nodes](./doc/images/flow_upsert.jpg)
+![Example of an upsert flow using the Coda nodes](./doc/images/flow_upsert.jpg)
 
 # TODO:
 - [] Add an option to get folders. Currently only supports tables
-- [] Build a coda row parser to feed coda row data into the upsert node
+- [] Build a Coda row parser to feed Coda row data into the upsert node
 - [] Accept `msg` object members as variable field values
 - [] Add validation
 - [] Add a better error handling
