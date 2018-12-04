@@ -95,7 +95,7 @@ The below is written under the assumption that:
 4. Connect it to the 'http request' function node. Open it and set the method to POST, then set the return value to 'parsed JSON object'
 5. Connect it to a debug node and set it to display the complete `msg` object, rather than the payload
 
-If you see the response `202`, then the upsert request was a success. It may take a while before the changes appear in the destination table.
+If you see the statusCode `202`, then the upsert request was a success. It may take a while before the changes appear in the destination table.
 
 ![Example of an upsert flow using the coda nodes](./doc/images/flow_upsert.jpg)
 
