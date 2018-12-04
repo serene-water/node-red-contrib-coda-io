@@ -4,7 +4,7 @@ var _ = require('lodash');
 
 module.exports = function(RED) {
 
-    function CodaIoTableNode(n) {
+    function CodaIoGetDataNode(n) {
 
         RED.nodes.createNode(this, n);
         let node = this;
@@ -24,5 +24,5 @@ module.exports = function(RED) {
             node.send(msg);
         });
     }
-    RED.nodes.registerType("coda-io-get-data", CodaIoTableNode);
+    RED.nodes.registerType("coda-io-get-data", CodaIoGetDataNode);
 }
