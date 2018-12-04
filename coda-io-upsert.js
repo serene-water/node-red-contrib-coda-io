@@ -35,18 +35,19 @@ module.exports = function(RED) {
                 // Process only the fields and values that are relevant
                 allFields.forEach((fieldName) => {
 
-                    // Encode the values
-                    if (inArray(fieldName, uriFields)) {
+                    // Contains URI elements. Encode the values
+                    if (uriFields.find(element => element == fieldName) && plArr[fieldName] !== null) {
                         plArr[fieldName] = encodeURI(plArr[fieldName]);
                     }
 
                     // Replace null with 0
-                    else if (inArray(fieldName, numFields) && plArr[fieldName] === null) {
+                    else if (numFields.find(element => element == fieldName) && plArr[fieldName] === null) {
                         plArr[fieldName] = 0;
                     }
 
-                    // Replace null with another value
-                    if (inArray(fieldName, allFields) && plArr[fieldName] === null) {
+                    // Replace null with another value because upsert will fail
+                    // if null is given
+                    if (plArr[fieldName] === null) {
                         plArr[fieldName] = n.null_val;
                     }
 
@@ -58,12 +59,14 @@ module.exports = function(RED) {
                     i++;
                 });
 
+                // Store all the cells in a single row
                 rows[rowNum] = {'cells': cells};
                 rowNum++;
-
             })
 
             msg.payload = {'rows': rows};
+
+            // If a key/keys are given for upsert, trim and store as an array
             if (n.key_cols.length != '') {
                 let key_cols = n.key_cols.split(',');
                 key_cols = key_cols.map(Function.prototype.call, String.prototype.trim);
@@ -79,16 +82,4 @@ module.exports = function(RED) {
         });
     }
     RED.nodes.registerType("coda-io-upsert", codaIoUpsert);
-}
-
-/**
- * search for a value in an array
- */
-
-function inArray(needle, haystack) {
-    var length = haystack.length;
-    for(var i = 0; i < length; i++) {
-        if(haystack[i] == needle) return true;
-    }
-    return false;
 }
