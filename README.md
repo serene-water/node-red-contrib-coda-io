@@ -4,7 +4,7 @@
 
 With [Coda APIs](https://coda.io/developers/apis/v1beta1 "coda.io APIs"), you can interact with tables within Coda documents. The nodes included in this package allow you to easily work with Coda APIs using Node-RED.
 
-**This package is compatible with Coda API version 0.1.1-beta. **
+**This package is compatible with Coda API version 0.1.1-beta**
 
 ## Content of this package and features
 
@@ -47,14 +47,14 @@ Here's an example of the flow:
 
 
 ### 2. Get rows from a table
-Once you found the ID of the table from which you want to get rows, add the table ID to the connection settings node. Then in the get data node, tick the 'Get rows' checkbox.
+Once you've found the ID of the table from which you want to get rows, add the table ID to the 'connection settings' node. Then in the 'get data' node, tick the 'Get rows' checkbox.
 
 Coda's response will be under `msg.payload.items`, which includes metadata of each row. Values of each row will be found in `msg.payload.items.values`.
 
 #### 2.1 Get 500+ rows from a table / ask Coda to return a certain number of rows per GET request
 Coda sets a limit of 500 rows per GET request (as of Dec 2018). If you want to retrieve more than 500 or retrieve a certain number of rows below 500 per request, you need to set a limit and send multiple GET requests by building a loop with the multiple pages node.
 
-In the below example, it uses a delay node to keep some interval between each request (although the delay node is probably an overkill, as each response to a GET request takes a few seconds to arrive). Coda has rate limits, but the details are not disclosed. If you are planning on sending loads of requests, it might be a good idea to contact them and see if they can increase the limit for you. The email address is found in the API doc.
+In the below example, it uses a 'delay' function node to keep some interval between each request (although the delay node is probably an overkill, as each response to a GET request takes a few seconds to arrive). Coda has rate limits, but the details are not disclosed. If you are planning on sending loads of requests within a short period of time, it might be a good idea to contact them and see if they can increase the limit for you. The email address is found in the API doc.
 
 ![Example of a flow with a loop using the multiple requests nodes](./doc/images/flow_multiple_requests.jpg)
 
@@ -104,11 +104,10 @@ If you see the statusCode `202`, then the upsert request was a success. It may t
 
 # TODO:
 - [] Add an option to get folders. Currently only supports tables
-- [] Build a Coda row parser to feed Coda row data into the upsert node
-- [] Accept `msg` object members as variable field values
-- [] Add validation
-- [] Add a better error handling
+- [] Build a Coda row parser to make it easy to feed Coda row data into the upsert node
+- [] Accept `msg` object members as variable field values so table/column names can be set dynamically
+- [] Add validations and error handling
 - [] Refactor the code a bit
 
 # CAUTION:
-This package is still in its infancy. It is likely that, in the near future, non-backwards-compatible may be introduced without prior notice. When a new version becomes available, make sure to test it thoroughly in a separate development environment before installing it to your production environment.
+This package is still in its infancy. It is likely that, in the near future, non-backwards compatible changes may be introduced without prior notice. When a new version becomes available, make sure to test it thoroughly in a discrete development environment before installing it to your production environment.
