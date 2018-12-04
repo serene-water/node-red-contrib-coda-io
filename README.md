@@ -100,8 +100,9 @@ If you see the response `202`, then the upsert request was a success. It may tak
 ![Example of an upsert flow using the coda nodes](./doc/images/flow_upsert.jpg)
 
 # TODO:
-- Add an option to get folders. Currently only supports tables
-- Build a coda row parser
+- [] Add an option to get folders. Currently only supports tables
+- [] Build a coda row parser to feed coda row data into the upsert node
+- [] Improve the code a bit
 
 # CAUTION:
 This package is still in its infancy. It is likely that, in the near future, non-backwards-compatible changes will be introduced without notice. When a new version becomes available, make sure to test it thoroughly in a separate development environment before installing the update to your production environment.

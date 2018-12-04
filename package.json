@@ -6,7 +6,8 @@
   "deprecated": false,
   "description": "A set of Node-RED nodes to interact with coda.io",
   "keywords": [
-    "coda.io"
+    "coda.io",
+    "node-red"
   ],
   "license": "MIT",
   "main": "core.js",
