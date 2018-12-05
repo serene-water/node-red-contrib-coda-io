@@ -17,8 +17,10 @@ module.exports = function(RED) {
                 // Construct the URL
                 const CodaReqestUrl = require('./core.js');
                 let coda = new CodaReqestUrl(msg.coda.doc_id, msg.coda.secondary_id);
-                let url = coda.getRequestUrl(n.get_rows);
-                msg.url = coda.appendLimit(url, n.limit);
+                msg.url = coda.getRequestUrl(n.get_rows);
+                if (n.get_rows === true) {
+                    msg.url = coda.appendLimit(msg.url, n.limit);
+                }
             }
 
             node.send(msg);
