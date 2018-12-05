@@ -13,7 +13,6 @@ With [Coda APIs](https://coda.io/developers/apis/v1beta1 "coda.io APIs"), you ca
   - **Get data node**
     - This node constructs a URL and HTTP header to:
       - get a list of tables in a doc
-      - get a list of columns in a table
       - get rows from a table
   - **Multiple pages node**
     - Sends multiple requests to Coda to retrieve a large number of rows from Coda (Coda allows you to retrieve up to 500 rows per GET request)
@@ -84,7 +83,7 @@ In order for the upsert node to format the data in the way Coda accepts, you nee
     . . .
 ]
 ```
-Althougg the above example only shows string values, you can also pass numbers, dates etc. as long as it matches with the destination column's format.
+Although the above example only shows string values, you can also pass numbers, dates etc. as long as it matches with the destination column's format.
 
 #### 3.1 How to set up an upsert flow
 
