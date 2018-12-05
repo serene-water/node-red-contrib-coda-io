@@ -33,7 +33,7 @@ The node comes with fields to enter the following information:
 To find your document ID, use [this tool](https://coda.io/developers/apis/v1beta1#doc-ids).
 
 ### 1. Find out table IDs
-1. Connect an inject node to a **Coda connection settings**__** node
+1. Connect an inject node to a **Coda connection settings** node
 2. Connect it to a **get data** node
 3. Connect it to an 'HTTP request' function node. Open the node, then select 'GET' in the 'Method' dropdown, as well as 'a parsed JSON object' for 'Return'
 4. Output the message to a debug node. Coda's response is found in `msg.payload`
