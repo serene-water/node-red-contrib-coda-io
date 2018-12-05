@@ -103,11 +103,11 @@ If you see the statusCode `202`, then the upsert request was a success. It may t
 ![Example of an upsert flow using the Coda nodes](./doc/images/flow_upsert.jpg)
 
 # TODO:
-- [] Add an option to get folders. Currently only supports tables
-- [] Add an option to get columns. Currently only supports rows
-- [] Build a Coda row parser to make it easy to feed Coda row data into the upsert node
-- [] Accept `msg` object members as variable field values so table/column names can be set dynamically
-- [] Add validations and error handling
+- [ ] Add an option to get folders. Currently only supports tables
+- [ ] Add an option to get columns. Currently only supports rows
+- [ ] Build a Coda row parser to make it easy to feed Coda row data into the upsert node
+- [ ] Accept `msg` object members as variable field values so table/column names can be set dynamically
+- [ ] Add validations and error handling
 
 # CAUTION:
 This package is still in its infancy. It is likely that, in the near future, non-backwards compatible changes may be introduced without prior notice. When a new version becomes available, make sure to test it thoroughly in a discrete development environment before installing it to your production environment.
