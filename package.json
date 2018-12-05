@@ -10,7 +10,6 @@
     "node-red"
   ],
   "license": "MIT",
-  "main": "core.js",
   "name": "node-red-contrib-coda-io",
   "dependencies": {
     "lodash": "^4.17.x"
@@ -23,8 +22,7 @@
       "coda-io-upsert": "coda-io-upsert.js",
       "coda-io-connection-api-token": "coda-io-connection-api-token.js",
       "coda-io-connection-doc-id": "coda-io-connection-doc-id.js"
-
     }
   },
-  "version": "0.3.0"
+  "version": "0.3.1"
 }
