@@ -20,6 +20,7 @@ module.exports = function(RED) {
             const connDocId = RED.nodes.getNode(n.doc_id);
             msg.coda.doc_id = connDocId.doc_id;
             msg.coda.secondary_id = n.secondary_id;
+            msg.coda.secondary_type = n.secondary_type;
 
             // Clean up if there is any remnants from previous requests
             delete msg.responseUrl;

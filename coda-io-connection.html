@@ -7,6 +7,7 @@
             bearer_api_token: {value: "", type: "coda-io-connection-api-token"},
             doc_id: {value:"", type: "coda-io-connection-doc-id"},
             secondary_id: {value: ""},
+            secondary_type: {value: "", default: "table"},
             name: {value: ""}
         },
         inputs: 1,
@@ -30,9 +31,19 @@
     </div>
 
     <div class="form-row">
-        <label for="node-input-secondary_id"> Table/Column ID</label>
+        <label for="node-input-secondary_type"> Supplying an ID/name of a:</label>
+        <select type="text" id="node-input-secondary_type">
+            <option value="tables" selected="selected">Table</option>
+            <option value="folders">Folder</option>
+            <option value="sections">Section</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-secondary_id"> ID</label>
         <input type="text" id="node-input-secondary_id" placeholder="Table/Column ID">
     </div>
+
 
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
