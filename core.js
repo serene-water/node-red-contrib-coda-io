@@ -4,7 +4,6 @@
  * Handles construction of request URL
  */
 
-
 module.exports = class CodaReqestUrl {
     constructor(docId, secondaryType, secondaryId) {
         this.docId = docId;
@@ -22,7 +21,10 @@ module.exports = class CodaReqestUrl {
         // }
     }
 
-    getRequestUrl(getRows) {
+    /**
+     * Returns a full URL for a request
+     */
+    getRequestUrl(type) {
 
         // TODO: allow variables, not just hard-coded values
         // const attrs = ['doc_id', 'secondary_id', 'limit', 'get_rows'];
@@ -69,15 +71,16 @@ module.exports = class CodaReqestUrl {
         // Dynamically assign the secondary ID's type
         req[this.secondaryType] = this.secondaryId;
 
-        if (getRows != null && getRows === true) {
-            req.rows = null;
+        // Request for rows or columns as per the setting. Ignore 'Nothing'
+        if (type != 'nothing'){
+            req[type] = null;
         }
 
         // If the doc_id is empty, pass only 'docs' to get a list of docs
         if (req.docs == '') {
             reqStr = 'docs'
         }
-
+        // Otherwise construct a query
         else {
             for (let str in req) {
                 if (req[str] != '' || req[str] != null) {
@@ -92,6 +95,10 @@ module.exports = class CodaReqestUrl {
 
     }
 
+    /**
+     * If a value for the limit is given, add it to the query.
+     * Otherwise set it to 500, which is the current maximum
+     */
     appendLimit(url, limit) {
         // Set the limit of number of rows to retrieve
         let paramLimit = "?limit=";

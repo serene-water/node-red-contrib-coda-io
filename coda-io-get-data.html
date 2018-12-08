@@ -5,7 +5,7 @@
         color: '#f6e9de',
         defaults: {
             limit: {value: ""},
-            get_rows: {value: false},
+            request_for: {value: "", default: "rows"},
             name: {value: ""}
         },
         inputs: 1,
@@ -19,9 +19,12 @@
 
 <script type="text/x-red" data-template-name="coda-io-get-data">
     <div class="form-row">
-        <label for="node-input-get_rows" style="vertical-align: top"><i class="fa fa-arrow-right"></i> Get rows</label>
-        <input type="checkbox" id="node-input-get_rows" style="display: inline-block; width: auto; vertical-align: top;">
-        <label for="node-input-get_rows" style="width: 70%;"> Get rows from the table</label>
+        <label for="node-input-request_for"> What to get from the table</label>
+        <select type="text" id="node-input-request_for">
+            <option value="rows" selected="selected">Rows</option>
+            <option value="columns">Columns</option>
+            <option value="nothing">Nothing</option>
+        </select>
     </div>
     <div class="form-row">
         <label for="node-input-limit"> Maximum number of records to return</label>
@@ -34,6 +37,13 @@
 </script>
 
 <script type="text/x-red" data-help-name="coda-io-get-data">
-    <p>Gets a table information or rows from a table.</p>
-    <p>In order to find your table's ID, you first need to supply the ID of a document which has the table. Use the tool provided <a href="https://coda.io/developers/apis/v1beta1#doc-ids">here</a> to find out the ID of your document.</p>
+    <p>Gets a table information, columns or rows from a table.</p>
+    <p>
+        <ul>
+            <li>Select 'Rows' to retrieve rows</li>
+            <li>Select 'Columns' to retrieve a list of columns in a given table</li>
+            <li>Select 'Nothing' to retrieve information on a document or table</li>
+        </ul>
+        The document and table information must be given in the preceding 'Connection settings' node.
+    </p>
 </script>

@@ -76,7 +76,7 @@ module.exports = function(RED) {
             // Finally, construct the URL
             const CodaReqestUrl = require('./core.js');
             let coda = new CodaReqestUrl(msg.coda.doc_id, msg.coda.secondary_type, msg.coda.secondary_id);
-            msg.url = coda.getRequestUrl(true);
+            msg.url = coda.getRequestUrl('rows');
 
             node.send(msg);
         });
