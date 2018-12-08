@@ -6,9 +6,11 @@
 
 
 module.exports = class CodaReqestUrl {
-    constructor(docId, secondaryId) {
+    constructor(docId, secondaryType, secondaryId) {
         this.docId = docId;
+        this.secondaryType = secondaryType;
         this.secondaryId = secondaryId;
+
         // Check the format
 
         // TODO: validate the content of the variables
@@ -21,7 +23,7 @@ module.exports = class CodaReqestUrl {
     }
 
     getRequestUrl(getRows) {
-        
+
         // TODO: allow variables, not just hard-coded values
         // const attrs = ['doc_id', 'secondary_id', 'limit', 'get_rows'];
         // let val = '';
@@ -60,17 +62,29 @@ module.exports = class CodaReqestUrl {
         // }
 
         // Construct a query string
+
         let reqStr;
         let req = {};
         req.docs = this.docId;
-        req.tables = this.secondaryId;
+        // Dynamically assign the secondary ID's type
+        req[this.secondaryType] = this.secondaryId;
+
         if (getRows != null && getRows === true) {
             req.rows = null;
         }
 
-        for(var str in req){
-            reqStr = (reqStr == undefined ? str : reqStr + '/' + str);
-            reqStr = (req[str] == null ? reqStr + '' : reqStr + '/' + req[str]);
+        // If the doc_id is empty, pass only 'docs' to get a list of docs
+        if (req.docs == '') {
+            reqStr = 'docs'
+        }
+
+        else {
+            for (let str in req) {
+                if (req[str] != '' || req[str] != null) {
+                    reqStr = (reqStr == undefined ? str : reqStr + '/' + str);
+                    reqStr = (req[str] == null ? reqStr + '' : reqStr + '/' + req[str]);
+                }
+            }
         }
 
         let url = 'https://coda.io/apis/v1beta1/' + reqStr;

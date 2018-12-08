@@ -9,7 +9,7 @@ With [Coda APIs](https://coda.io/developers/apis/v1beta1 "coda.io APIs"), you ca
 ## Content of this package and features
 
   - **Connection settings node**
-    - Stores multiple Coda API tokens and table IDs
+    - Stores multiple Coda API tokens and table IDs/names (use of names is not recommended as names can change)
   - **Get data node**
     - This node constructs a URL and HTTP header to:
       - get a list of tables in a doc
@@ -27,12 +27,13 @@ Please note: this package does not handle HTTP requests, but relies on the 'HTTP
 The node comes with fields to enter the following information:
   - Coda API authentication key
   - Document ID
-  - Table ID (optional)
+  - Table ID/name (optional)
 
 To find your document ID, use [this tool](https://coda.io/developers/apis/v1beta1#doc-ids).
 
 ### 1. Find out table IDs
-1. Connect an inject node to a **Coda connection settings** node
+(This step can be omitted if you use a table ID. However, it makes the system fragile as table names can change and therefore not recommended)
+1. Connect an inject node to a **Coda connection settings** node. Add the document ID which the table you want to access is placed in
 2. Connect it to a **get data** node
 3. Connect it to an 'HTTP request' function node. Open the node, then select 'GET' in the 'Method' dropdown, as well as 'a parsed JSON object' for 'Return'
 4. Output the message to a debug node. Coda's response is found in `msg.payload`
@@ -102,7 +103,7 @@ If you see the statusCode `202`, then the upsert request was a success. It may t
 ![Example of an upsert flow using the Coda nodes](./doc/images/flow_upsert.jpg)
 
 # TODO:
-- [ ] Add an option to get folders. Currently only supports tables
+- [x] Add an option to get folders and sections. Currently only supports tables
 - [ ] Add an option to get columns. Currently only supports rows
 - [ ] Build a Coda row parser to make it easy to feed Coda row data into the upsert node
 - [ ] Accept `msg` object members as variable field values so table/column names can be set dynamically
