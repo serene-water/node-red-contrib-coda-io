@@ -12,7 +12,7 @@ With [Coda APIs](https://coda.io/developers/apis/v1beta1 "coda.io APIs"), you ca
     - Stores multiple Coda API tokens and table IDs/names (use of names is not recommended as names can change)
   - **Get data node**
     - This node constructs a URL and HTTP header to:
-      - get a list of tables in a doc
+      - get a list of tables, folders and sections in a doc
       - get a list of columns from a table
       - get rows from a table
   - **Multiple pages node**
