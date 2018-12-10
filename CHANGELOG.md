@@ -1,5 +1,12 @@
 # Change log
 
+## v0.6.1
+
+Added input validation to the following nodes:
+- Connection settings (excludes the API token and document ID fields)
+- Get data
+- Upsert
+
 ## v0.6.0
 **This release contains a change that is not backward-compatible. Please update your settings in the 'Connection settings' node**
 - Coda API tokens no longer get exported when nodes/flows are exported for improved security

@@ -1,14 +1,15 @@
 <script type="text/javascript">
+    const pattern = /^[a-zA-Z0-9-_,\s]*$/;
     RED.nodes.registerType('coda-io-upsert',{
         category: 'function',
         color: '#f6e9de',
         defaults: {
             name: {value: ""},
-            coda_cnf_field_char_conv: {value: ""},
-            coda_cnf_field_num_val: {value: ""},
-            coda_cnf_field_no_conv: {value: ""},
+            coda_cnf_field_char_conv: {value: "", validate:RED.validators.regex(pattern)},
+            coda_cnf_field_num_val: {value: "", validate:RED.validators.regex(pattern)},
+            coda_cnf_field_no_conv: {value: "", validate:RED.validators.regex(pattern)},
             null_val: {value: "[ empty ]"},
-            key_cols: {value: ""}
+            key_cols: {value: "", validate:RED.validators.regex(pattern)}
         },
         inputs: 1,
         outputs: 1,
