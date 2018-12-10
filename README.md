@@ -114,7 +114,8 @@ If you see the statusCode `202`, then the upsert request was a success. It may t
 - [x] Prevent API tokens from getting exported
 - [ ] Build a Coda row parser to make it easy to feed Coda row data into the upsert node
 - [ ] Accept `msg` object members as variable field values so table/column names can be set dynamically
-- [ ] Add validations and error handling
+- [x] Add input validation
+- [ ] Add better error handling
 
 # CAUTION:
 This package is still in its infancy. It is likely that, in the near future, non-backwards compatible changes may be introduced without prior notice. When a new version becomes available, make sure to test it thoroughly in a discrete development environment before installing it to your production environment.

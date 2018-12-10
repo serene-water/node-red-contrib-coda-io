@@ -4,7 +4,9 @@
         category: 'function',
         color: '#f6e9de',
         defaults: {
-            limit: {value: ""},
+            // Not implementing a rigorous check, as invalid value will
+            // result in a response with the default 500 rows
+            limit: {value: "", validate:function(v) { return RED.validators.number(v) && (v >= 0); }},
             request_for: {value: "", default: "rows"},
             name: {value: ""}
         },

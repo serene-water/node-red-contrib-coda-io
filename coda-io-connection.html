@@ -1,4 +1,5 @@
 <script type="text/javascript">
+    const pattern = /^[a-zA-Z0-9-_]*$/;
     RED.nodes.registerType('coda-io-connection',
     {
         category: 'function',
@@ -6,7 +7,7 @@
         defaults: {
             bearer_api_token: {value: "", type: "coda-io-connection-api-token"},
             doc_id: {value:"", type: "coda-io-connection-doc-id"},
-            secondary_id: {value: ""},
+            secondary_id: {value: "", validate:RED.validators.regex(pattern)},
             secondary_type: {value: "", default: "table"},
             name: {value: ""}
         },
