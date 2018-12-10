@@ -111,6 +111,7 @@ If you see the statusCode `202`, then the upsert request was a success. It may t
 # TODO:
 - [x] Add an option to get folders and sections. Currently only supports tables
 - [x] Add an option to get columns. Currently only supports rows
+- [x] Prevent API tokens from getting exported
 - [ ] Build a Coda row parser to make it easy to feed Coda row data into the upsert node
 - [ ] Accept `msg` object members as variable field values so table/column names can be set dynamically
 - [ ] Add validations and error handling
