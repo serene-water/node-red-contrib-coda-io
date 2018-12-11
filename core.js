@@ -9,16 +9,6 @@ module.exports = class CodaReqestUrl {
         this.docId = docId;
         this.secondaryType = secondaryType;
         this.secondaryId = secondaryId;
-
-        // Check the format
-
-        // TODO: validate the content of the variables
-        // const pattern = /^[0-9a-zA-Z-_]$/;
-        // if (docId.match(pattern) && secondaryId.match(pattern)) {
-
-        // _docId.set(this, docId);
-        // _secondaryId.set(this, secondaryId);
-        // }
     }
 
     /**
@@ -89,10 +79,8 @@ module.exports = class CodaReqestUrl {
                 }
             }
         }
-
         let url = 'https://coda.io/apis/v1beta1/' + reqStr;
         return url;
-
     }
 
     /**
@@ -103,7 +91,7 @@ module.exports = class CodaReqestUrl {
         // Set the limit of number of rows to retrieve
         let paramLimit = "?limit=";
         const num = parseInt(limit)
-        if (num != null && num <= 500) {
+        if (num != null && num > 0 && num <= 500) {
             paramLimit = paramLimit + num;
         }
         else {
