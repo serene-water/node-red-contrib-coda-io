@@ -13,6 +13,9 @@ module.exports = class CodaReqestUrl {
 
     /**
      * Returns a full URL for a request
+     * 
+     * @param {String} type The type of resource to request
+     * @returns {String} A full request URL without the record limit
      */
     getRequestUrl(type) {
 
@@ -79,24 +82,40 @@ module.exports = class CodaReqestUrl {
                 }
             }
         }
-        let url = 'https://coda.io/apis/v1beta1/' + reqStr;
-        return url;
+        
+        return 'https://coda.io/apis/v1beta1/' + reqStr;
     }
 
     /**
-     * If a value for the limit is given, add it to the query.
-     * Otherwise set it to 500, which is the current maximum
+     * Specify the record limit, if the value is given. Otherwise set it to
+     * 500, which is the current maximum set by Coda.
+     * 
+     * @param {number} limit The maximun number of records to return
+     * @returns {number} Return the number between 1 - 500
      */
-    appendLimit(url, limit) {
-        // Set the limit of number of rows to retrieve
-        let paramLimit = "?limit=";
-        const num = parseInt(limit)
+    specifyRecordLimit(limit) {
+        const num = parseInt(limit);
         if (num != null && num > 0 && num <= 500) {
-            paramLimit = paramLimit + num;
+            return num;
         }
         else {
-            paramLimit = paramLimit + 500;
+            return 500;
         }
-        return url + paramLimit;
     }
+
+    /**
+     * Receives an array of key-value pairs of query parameter elements and
+     * returns as a string of query parameters be appended to a request.
+     *
+     * @param {Array} arr An array of key-value pairs of to be converted into
+     *  a query string.
+     * @returns {String} Returns a query string to be appended to a request
+     *  without the leading '?'.
+     */
+    encodeQueryParams(arr) {
+        const params = [];
+        for (let kv in arr)
+            params.push(encodeURIComponent(kv) + '=' + encodeURIComponent(arr[kv]));
+        return params.join('&');
+     }
 }

@@ -1,6 +1,6 @@
 "use strict";
 
-var _ = require('lodash');
+const _ = require('lodash');
 
 module.exports = function(RED) {
 
@@ -20,10 +20,29 @@ module.exports = function(RED) {
                 let coda = new CodaReqestUrl(msg.coda.doc_id, msg.coda.secondary_type, msg.coda.secondary_id);
 
                 msg.url = coda.getRequestUrl(n.request_for);
+
                 // If the secondary type is table and the rows option is selected
-                // get the rows
+                // get the rows.
                 if (msg.coda.secondary_type == 'tables' && n.request_for == 'rows') {
-                    msg.url = coda.appendLimit(msg.url, n.limit);
+
+                    const limit = coda.specifyRecordLimit(n.limit);
+
+                    // If query parameters are provided, join it with the
+                    // limit. Otherwise only supply the limit as the parameter.
+                    let params = {};
+
+                    if (typeof msg.coda.params === 'object') {
+                        msg.coda.params.limit = limit;
+                        params = coda.encodeQueryParams(msg.coda.params);
+                    }
+                    else {
+                        let limitParam = {'limit': limit};
+                        params = coda.encodeQueryParams(limitParam);
+
+                    }
+
+                    msg.url = msg.url + '?' + params;
+
                 }
                 else if (msg.coda.secondary_type != 'tables' && n.request_for == 'rows') {
                     node.error('Requesting for rows while a table information was not supplied in the "Connection settings" node. Make sure the option "Table" is selected in the "Connection settings" node.', err);
