@@ -1,5 +1,9 @@
 # Change log
 
+## v0.6.4
+
+- The 'get data' node can now handle parameters other than 'limit'. Parameters can be passed to the node using `msg.coda.params`.
+
 ## v0.6.1
 
 Added input validation to the following nodes:
