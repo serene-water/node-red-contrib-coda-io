@@ -10,6 +10,16 @@ module.exports = function(RED) {
         let node = this;
         node.on('input', function(msg) {
 
+            // Set the auth header again, in case it was previously set
+            // by the connection node and we are connecting to the same doc.
+            //
+            // If one wishes to connect to a different doc / table etc., then
+            // they must set it using a new connection node
+            if (msg.coda.headerBearer != null) {
+                msg.headers = {};
+                msg.headers['Authorization'] = msg.coda.headerBearer;
+            }
+
             // If nextPageLink is given, use the lind to request
             if (typeof msg.coda.nextPageLink !== 'undefined') {
                 msg.url = msg.coda.nextPageLink;

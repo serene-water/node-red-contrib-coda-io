@@ -14,7 +14,7 @@ module.exports = function(RED) {
             msg.coda = {header: ''};
             msg.headers = {};
             msg.headers['Authorization'] = 'Bearer ' + api_token;
-            msg.coda.header = msg.headers['Authorization'];
+            msg.coda.headerBearer = msg.headers['Authorization'];
 
             //TODO: handle folders
             const connDocId = RED.nodes.getNode(n.doc_id);
