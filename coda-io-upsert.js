@@ -73,6 +73,16 @@ module.exports = function(RED) {
                 msg.payload.keyColumns = key_cols;
             }
 
+            // Set the auth header again, in case it was previously set
+            // by the connection node and we are connecting to the same doc.
+            //
+            // If one wishes to connect to a different doc / table etc., then
+            // they must set it using a new connection node
+            if (msg.coda.headerBearer != null) {
+                msg.headers = {};
+                msg.headers['Authorization'] = msg.coda.headerBearer;
+            }
+
             // Finally, construct the URL
             const CodaReqestUrl = require('./core.js');
             let coda = new CodaReqestUrl(msg.coda.doc_id, msg.coda.secondary_type, msg.coda.secondary_id);
