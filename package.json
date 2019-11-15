@@ -12,7 +12,7 @@
   "license": "MIT",
   "name": "node-red-contrib-coda-io",
   "dependencies": {
-    "lodash": "^4.17.x"
+    "lodash": "^4.17.15"
   },
   "node-red": {
     "nodes": {
@@ -28,5 +28,5 @@
     "type": "git",
     "url": "https://github.com/serene-water/node-red-contrib-coda-io"
   },
-  "version": "0.6.4"
+  "version": "0.6.5"
 }
