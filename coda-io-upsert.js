@@ -1,8 +1,8 @@
 "use strict";
+
 module.exports = function(RED) {
 
     function codaIoUpsert(n) {
-
         RED.nodes.createNode(this, n);
         var node = this;
         node.on('input', function(msg) {
