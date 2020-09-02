@@ -83,7 +83,7 @@ module.exports = class CodaReqestUrl {
             }
         }
         
-        return 'https://coda.io/apis/v1beta1/' + reqStr;
+        return 'https://coda.io/apis/v1/' + reqStr;
     }
 
     /**
